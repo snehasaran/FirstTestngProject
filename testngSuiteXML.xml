@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Login tests">
+	<test name="P1 test">
+		<groups>
+			<run>
+				<include name="p1"/>
+			</run>
+		</groups>
+		
+		<classes>
+			<class name="firsttestngpackage.FirstTestNGFile">
+			</class>
+		
+		</classes>
+	</test>
+	<!-- <test name="P2 test">
+		<groups>
+			<run>
+				<include name="p2"/>
+			</run>
+		</groups>
+		
+		<classes>
+			<class name="firsttestngpackage.FirstTestNGFile">
+				<methods>
+					<exclude name="filloutPasswordFld"></exclude>
+				</methods>
+			</class>
+		
+		</classes>
+	</test> -->
+
+</suite>

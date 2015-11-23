@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Login tests" thread-count="5" parallel="methods">
+<!-- <parameter name="tv" value="1"></parameter>
+<parameter name="socks" value="2"></parameter>
+<parameter name="iPhone" value="3"></parameter>
+<parameter name="dvd" value="4"></parameter>
+<parameter name="toys" value="5"></parameter> 
+  	<parameter name="category" value="JCG TestNG Category"></parameter>
+    <parameter name="category" value="Test1"></parameter>
+    <parameter name="category" value="Test3"></parameter>
+    <parameter name="exampleDesc" value="Test4"></parameter>
+	<parameter name="exampleDesc" value="TestNG Parameter Example"></parameter>
+    <parameter name="exampleDesc" value="Test2"></parameter>-->
+    
+	<test name="P1 test">	
+		<groups>
+			<run>
+				<include name="p1"/>
+			</run>
+		</groups>
+		<classes>
+			<class name="firsttestngpackage.SecondTestNGFile">
+			</class>
+		</classes>
+	</test>
+
+</suite>
