@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Login tests]" parallel="methods">
-  <test name="P1 test(failed)" parallel="methods">
-    <groups>
-      <run>
-        <include name="p1"/>
-      </run>
-    </groups>
+<suite name="Failed suite [Command line suite]">
+  <test name="Command line test(failed)">
     <classes>
       <class name="firsttestngpackage.SecondTestNGFile">
         <methods>
           <include name="setup"/>
           <include name="filloutEmailFld"/>
-          <include name="checkPageLoad"/>
-          <include name="findSearchBar" invocation-numbers="4"/>
+          <include name="checkPageLoad" invocation-numbers="0"/>
+          <include name="findSearchBar"/>
           <include name="findSubmitButton"/>
           <include name="teardown"/>
           <include name="testCorrectLoginIn"/>
@@ -21,5 +16,5 @@
         </methods>
       </class> <!-- firsttestngpackage.SecondTestNGFile -->
     </classes>
-  </test> <!-- P1 test(failed) -->
-</suite> <!-- Failed suite [Login tests] -->
+  </test> <!-- Command line test(failed) -->
+</suite> <!-- Failed suite [Command line suite] -->

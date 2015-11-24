@@ -1,5 +1,6 @@
 package firsttestngpackage;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -29,10 +30,12 @@ public class SecondTestNGFile {
 	
 	 @BeforeClass(alwaysRun = true)
 	 public void setup(){
-		 System.setProperty("webdriver.chrome.driver", "/Users/Sneha/Desktop/chromedriver");
+		 //Path:::: lib/chromedriver
+		 
+		 System.setProperty("webdriver.chrome.driver", "chromedriver");
 		 driver = new ChromeDriver();
 		 driver.manage().window().maximize();
-		 wait = new WebDriverWait(driver, 5);
+		 wait = new WebDriverWait(driver, 100);
 	 }
 	 
 	 @AfterClass(alwaysRun = true)
@@ -129,10 +132,12 @@ public class SecondTestNGFile {
 				pickElem = driver.findElement(By.xpath("//*[@id='tile-container']/div[1]/div/div/h4/a"));
 		  }
 		  
-		  
 		  try{
 			  Actions action = new Actions(driver);
+			  Thread.sleep(5000);
 				action.moveToElement(pickElem).click().perform();
+				
+				Thread.sleep(200);
 				System.out.println("Element selected");
 		  }
 		  catch(Exception e){
@@ -215,6 +220,7 @@ public class SecondTestNGFile {
 
 					WebElement selectSizeActual = driver.findElement(By.xpath("//div[2]/section/section[4]/div/div[2]/div[1]/div[5]/div[2]/div/div[2]/div/div[2]/div/div[1]/div[1]/div/div/div/button[2]"));
 					//selectSizeActual.sendKeys("4-10");
+					Thread.sleep(2000);
 					selectSizeActual.click();
 					/*if(selectSizeActual.isSelected()){
 
@@ -241,6 +247,9 @@ public class SecondTestNGFile {
 			Thread.sleep(1000);
 			
 			boolean submitbuttonPresence=driver.findElement(By.xpath("//*[@id='WMItemAddToCartBtn']")).isDisplayed();
+			
+			Thread.sleep(2000);
+			
 			if(submitbuttonPresence){
 				WebElement addToCart = driver.findElement(By.xpath("//*[@id='WMItemAddToCartBtn']"));
 				addToCart.click();
@@ -254,35 +263,81 @@ public class SecondTestNGFile {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("btn-out-of-stock")));
 				wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-out-of-stock")));
 				boolean getInStockAlertButton=driver.findElement(By.className("btn-out-of-stock")).isDisplayed();
+				
+				
 				if(getInStockAlertButton){
 					System.out.println("Item out of stock");
-					System.exit(0);
+					//System.exit(0);
 				}
 			}catch(Exception e1){
 				e.printStackTrace();
 				System.out.println("Something went wrong, item couldn't be added to cart."+e1.getMessage());
-				System.exit(0);
+				//System.exit(0);
 			}
 			
 		}
+		
+		//View cart
+		
+		try{
+
+			// WAIT UNTIL THE VIEW CART BUTTON IS NOT LOCATED
+			WebDriverWait wait = new WebDriverWait(driver, 100);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("PACViewCartBtn")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("PACViewCartBtn")));
+
+			WebElement viewCart = driver.findElement(By.id("PACViewCartBtn"));
+			Actions action = new Actions(driver);
+			System.out.println("Clicking view cart button");
+			action.moveToElement(viewCart).click().perform();
+			// viewCart.click();
+			System.out.println("Cart being reviewed");
+		}
+		catch(Throwable e){
+			System.out.println("Cannot review cart");
+			//System.exit(0);
+		}
+		
+		
+		//Validate Cart
+		try{
+			// WAIT UNTIL Selected item IS NOT LOCATED IN CART.
+			WebDriverWait wait = new WebDriverWait(driver, 150);
 			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='"+cartLink+"']")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='"+cartLink+"']")));
+
+			//check if the Selected Item is present in cart
+			List<WebElement> ifSelectedItemInCart = driver.findElements(By.cssSelector("a[href='"+cartLink+"']"));
+			int x = ifSelectedItemInCart.size();
+			if(x !=0){
+				System.out.println("Selected element present in cart");
+			}
+			else{
+				System.out.println("Selected element NOT present in cart");
+				//System.exit(0);
+			}
+
+
+			//check if there are other elements in cart, other than the selected item
+			List<WebElement> elementsRoot = driver.findElements(By.className("cart-item-row"));
+			int count = elementsRoot.size() -1;
+			if(count == 1){
+				System.out.println("1 element found in cart");
+			}
+			else{
+				System.out.println("More than 1 element found in cart : " + count);
+			}
+
+		}
+		catch(Throwable e){
+			System.out.println("Could not locate selected item in cart");
+			//System.exit(0);
+		}
+
 			
 	  }//End of findSearchbar method
 	  
-	  /*@Test(groups={"p1","pageloads"},dependsOnMethods="findSearchBar",priority = 15,testName="clickSearchButton",singleThreaded=false)
-	  public void clickSearchButton() throws InterruptedException{
-		  WebElement findSearchButton = driver.findElement(By.className("searchbar-submit"));
-		  findSearchButton.click(); 
-		  System.out.println("Search button clicked");
-		  Thread.sleep(200);
-		  Assert.assertTrue(true);
-	  }*/
-	  
-      /*@Test(groups="p1",dataProvider="inputKeywords",dataProviderClass=DataProviderClass.class,threadPoolSize = 3)
-      public void t1(String category,String exampleDesc) {
-          System.out.println("t1: " + category + ":" + exampleDesc);
-          System.out.println(Thread.currentThread().getId());
-      }*/
 	
 	
 
