@@ -81,6 +81,12 @@ Selected element present in cart
 More than 1 element found in cart : 5
 
 
+Understanding the Program: automateTestngClass.java is the driver program which calls and executes all tests in SecondTestNGFile.java. 
+DataProviderClass has 2 methods: 
+pages -- This is used by checkPageLoad method in SecondTestNGFile.java to specify the URL and title. 
+inputKeywords -- This is used by findSearchBar to search all input keywords.
+
+
 
 Bug found in ChromeDriver: 
 
